@@ -1,5 +1,6 @@
 package com.example.recalltracker.Utilities;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -15,16 +16,16 @@ public class VehicleInfoUtils {
 
     private static final String TAG = "VehicleInfoUtils: ";
 
-    private static final String VIN_API_URL = "http://api.carmd.com/v3.0/decode?vin=";
+    private static final String VIN_API_URL = "http://api.carmd.com/v3.0/decode?vin=JTMDJREV6HD120994";
 
-    private static final String VIN_API_PARTNER_TOKEN = "76d59ce637ac4979bd1ad37da4560bb5";
+    private static final String VIN_API_PARTNER_TOKEN = "033ce0cbcc23423499590413ace18656";
 
-    private static final String VIN_API_AUTH_TOKEN = "Basic N2U1ZTcyNzYtZGRhZi00NGJkLTk1ZWYtZGMzMjQ2MmU2NTRh";
+    private static final String VIN_API_AUTH_TOKEN = "MDc1OWQyZTQtMGFkMy00OGFhLWEyZTctNTRhZmY0Y2NlNjc5";
 
 
     public interface AsyncResponse {
 
-        void processFinish();
+        void processFinish(Integer year, String make, String model);
     }
 
     public static class placeIdTask extends AsyncTask<String, Void, JSONObject> {
@@ -38,13 +39,14 @@ public class VehicleInfoUtils {
         }
 
         @Override
-        protected JSONObject doInBackground(String... params) {
+        protected JSONObject doInBackground(String...params) {
 
             JSONObject jsonVIN = null;
             try {
                 jsonVIN = getVINJSON(params[0]);
+
             } catch (Exception e ) {
-                Log.e(TAG, "Cannot process JSON results ", e);
+                Log.e(TAG, "doInBackground(): Cannot process JSON results ", e);
             }
 
             return jsonVIN;
@@ -62,19 +64,45 @@ public class VehicleInfoUtils {
 
                     delegate.processFinish(year, make, model);
                 }
+                else {
+                    Log.e(TAG, "json is null");
+                }
             } catch (JSONException e) {
                 Log.e(TAG, "Cannot process JSON Response ", e);
             }
         }
 
+        public static String buildVINURL(String vinQuery) {
+            Uri.Builder builder = Uri.parse(VIN_API_URL).buildUpon();
+
+            builder.appendPath(VIN_API_URL);
+            builder.appendPath(vinQuery);
+
+            Log.d(TAG, "buildVINURL: " + builder.build().toString());
+//            if(!TextUtils.isEmpty(searchQuery)) {
+//                builder.appendPath(searchQuery);
+//            }
+
+            return builder.build().toString();
+        }
+
         public static JSONObject getVINJSON(String vinNumber) {
             try {
-                URL url = new URL(String.format(VIN_API_URL, vinNumber));
+                String vinQuery = "JTMDJREV6HD120994";
+
+                URL url = new URL(VIN_API_URL);
 
                 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
-                connection.addRequestProperty("x-api-key", VIN_API_AUTH_TOKEN);
-                connection.addRequestProperty("x-api-token", VIN_API_PARTNER_TOKEN);
+                connection.setRequestProperty("Authorization", "Basic " + VIN_API_AUTH_TOKEN);
+                connection.setRequestProperty("Partner-Token", VIN_API_PARTNER_TOKEN);
+
+                int status = connection.getResponseCode();
+                if(status != 200) {
+                    Log.e(TAG, "bad response code, status is: " + status);
+                }
+
+                Log.d(TAG, connection.toString());
 
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(connection.getInputStream()));
@@ -87,14 +115,12 @@ public class VehicleInfoUtils {
 
                 JSONObject data = new JSONObject(json.toString());
 
-                // This value will be 404 if the request was not successful
-                if(data.getInt("cod") != 200){
-                    return null;
-                }
+                Log.d(TAG, "data: " + data.toString());
 
                 return data;
 
             } catch (Exception e) {
+                Log.e(TAG, "Error: ", e);
                 return null;
             }
         }

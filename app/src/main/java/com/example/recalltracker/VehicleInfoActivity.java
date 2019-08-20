@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.recalltracker.Utilities.VehicleInfoUtils;
 
-public class VehicleInfoActivity extends Activity {
+public class VehicleInfoActivity extends AppCompatActivity {
 
     private TextView year_TV, make_TV, model_TV;
 
@@ -29,8 +29,8 @@ public class VehicleInfoActivity extends Activity {
 
         VehicleInfoUtils.placeIdTask asyncTask = new VehicleInfoUtils.placeIdTask(new VehicleInfoUtils.AsyncResponse() {
             @Override
-            public void processFinish(String year, String make, String model) {
-                year_TV.setText(year);
+            public void processFinish(Integer year, String make, String model) {
+                year_TV.setText(Integer.toString(year));
                 make_TV.setText(make);
                 model_TV.setText(model);
             }
