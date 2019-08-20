@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -51,12 +52,28 @@ public class MainActivity extends AppCompatActivity {
                 return handled;
             }
         });
+
+        ImageButton searchButton = (ImageButton) findViewById(R.id.btn_search);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchQuery = mSearchBoxET.getText().toString();
+                if (!TextUtils.isEmpty(searchQuery)) {
+
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mSearchBoxET.getWindowToken(), 0);
+
+                    Log.d(TAG, "search button hit");
+                    doVINSearch(searchQuery);
+                }
+            }
+        });
     }
 
     private void doVINSearch(String searchQuery) {
         //String VINSearchURL = RecallTrackerUtils.buildVINSearchURL(searchQuery);
         Bundle args = new Bundle();
-        //args.putString(VIN_SEARCH_KEY, VINSearchURL);
+//        args.putString(VIN_SEARCH_KEY, VINSearchURL);
         mLoadingProgressBar.setVisibility(View.VISIBLE);
        // getSupportLoaderManager().restartLoader(RECALL_TRACKER_SEARCH_LOADER_ID, args, this);
 
