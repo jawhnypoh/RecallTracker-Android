@@ -10,9 +10,9 @@ import com.example.recalltracker.Utilities.VehicleInfoUtils;
 
 public class VehicleInfoActivity extends AppCompatActivity {
 
-    private TextView year_TV, make_TV, model_TV;
+    private TextView year_TV, vin_TV;
 
-    private String SAMPLE_VIN = "JTMDJREV6HD120994";
+    private String SAMPLE_VIN = "5TFAW5F19EX759955";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +23,14 @@ public class VehicleInfoActivity extends AppCompatActivity {
     }
 
     protected void setVehicleInfo() {
-        year_TV = (TextView)findViewById(R.id.year_tv);
-        make_TV = (TextView)findViewById(R.id.make_tv);
-        model_TV = (TextView)findViewById(R.id.model_tv);
+        year_TV = (TextView)findViewById(R.id.car_info_tv);
+        vin_TV = (TextView)findViewById(R.id.vin_tv);
 
         VehicleInfoUtils.placeIdTask asyncTask = new VehicleInfoUtils.placeIdTask(new VehicleInfoUtils.AsyncResponse() {
             @Override
             public void processFinish(Integer year, String make, String model) {
-                year_TV.setText(Integer.toString(year));
-                make_TV.setText(make);
-                model_TV.setText(model);
+                year_TV.setText(Integer.toString(year) + " " + make + " " + model);
+                vin_TV.setText("VIN: " + SAMPLE_VIN);
             }
         });
 

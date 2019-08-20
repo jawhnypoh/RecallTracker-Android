@@ -16,7 +16,7 @@ public class VehicleInfoUtils {
 
     private static final String TAG = "VehicleInfoUtils: ";
 
-    private static final String VIN_API_URL = "http://api.carmd.com/v3.0/decode?vin=JTMDJREV6HD120994";
+    private static final String VIN_API_URL = "http://api.carmd.com/v3.0/decode?vin=5TFAW5F19EX759955";
 
     private static final String VIN_API_PARTNER_TOKEN = "033ce0cbcc23423499590413ace18656";
 
@@ -88,8 +88,6 @@ public class VehicleInfoUtils {
 
         public static JSONObject getVINJSON(String vinNumber) {
             try {
-                String vinQuery = "JTMDJREV6HD120994";
-
                 URL url = new URL(VIN_API_URL);
 
                 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
