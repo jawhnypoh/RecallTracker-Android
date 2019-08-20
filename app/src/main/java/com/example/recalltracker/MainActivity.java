@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.recalltracker.Utilities.RecallTrackerUtils;
 
@@ -47,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "IME Search handled correctly ");
                         handled = true;
                     }
+                    else {
+                        // TextUtils is empty, can't be allowed
+                        Toast.makeText(getApplicationContext(),"VIN cannot be empty",Toast.LENGTH_SHORT).show();
+                    }
                 }
                 Log.d(TAG, "IME Search not handled correctly ");
                 return handled;
@@ -64,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
                     imm.hideSoftInputFromWindow(mSearchBoxET.getWindowToken(), 0);
 
                     Log.d(TAG, "search button hit");
-                    doVINSearch(searchQuery);
+//                    doVINSearch(searchQuery);
+                }
+                else {
+                    // TextUtils is empty, can't be allowed
+                    Toast.makeText(getApplicationContext(),"VIN cannot be empty",Toast.LENGTH_SHORT).show();
                 }
             }
         });
