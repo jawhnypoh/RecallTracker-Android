@@ -21,9 +21,9 @@ public class ResultsActivity extends AppCompatActivity {
         Note = "Baby Shark";
         NoteDescription = "doo doo doo";
         Defect = "What not to break";
-        Defectresults = "My heart";
+        Defectresults = "My heart hurts my soul, blah bleh big tears cry cry whine while eating hearts of my enemies";
         Consequence = "Heartache";
-        Consequences = "From broken heart";
+        Consequences = "From broken heart, these consequences tend to be very long in order for the explaination to be accurate this is veyrt i am making this very long";
 
         super.onCreate(savedInstanceState);
 
