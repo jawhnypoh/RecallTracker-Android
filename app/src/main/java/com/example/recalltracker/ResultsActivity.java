@@ -16,14 +16,14 @@ public class ResultsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Campaign_Number = "Egg Salad";
-        CampaignDescription = "Yummy yummy";
-        Note = "Baby Shark";
-        NoteDescription = "doo doo doo";
-        Defect = "What not to break";
-        Defectresults = "My heart hurts my soul, blah bleh big tears cry cry whine while eating hearts of my enemies";
-        Consequence = "Heartache";
-        Consequences = "From broken heart, these consequences tend to be very long in order for the explaination to be accurate this is veyrt i am making this very long";
+        Campaign_Number = "Campaign Number:";
+        CampaignDescription = "This shouldn't be here";
+        Note = "Note:";
+        NoteDescription = "wHaT ArE U dOIn";
+        Defect = "Defect:";
+        Defectresults = "Testing";
+        Consequence = "Consequence:";
+        Consequences = "Sales sux";
 
         super.onCreate(savedInstanceState);
 
@@ -33,15 +33,23 @@ public class ResultsActivity extends AppCompatActivity {
         TextView notes = findViewById(R.id.Notes);
         TextView defect = findViewById(R.id.Defect);
         TextView consequence = findViewById(R.id.Consequences);
-        setResults(Campaign_Number,CampaignDescription,MFG_Campaign_number);
-        setResults(Note,NoteDescription,notes);
-        setResults(Defect,Defectresults,defect);
-        setResults(Consequence,Consequences,consequence);
-        //setResults(Campaign_Number,CampaignDescription,MFG_Campaign_number);
+        TextView MFG_Campaign_Header = findViewById(R.id.MFG_Campaign_Header);
+        TextView notes_Header =findViewById(R.id.Notes_Header);
+        TextView defect_Header =findViewById(R.id.Defect_Header);
+        TextView consequence_Header =findViewById(R.id.Consequence_Header);
+
+        setResults(Campaign_Number,MFG_Campaign_Header);
+        setResults(Note,notes_Header);
+        setResults(Defect,defect_Header);
+        setResults(Consequence,consequence_Header);
+        setResults(CampaignDescription,MFG_Campaign_number);
+        setResults(NoteDescription,notes);
+        setResults(Defectresults,defect);
+        setResults(Consequences,consequence);
     }
 
-    protected void setResults(String descriptor, String description, TextView textview) {
-        textview.setText(descriptor + ": " + description);
+    protected void setResults(String descriptor, TextView textview) {
+        textview.setText(descriptor);
 
     }
 
