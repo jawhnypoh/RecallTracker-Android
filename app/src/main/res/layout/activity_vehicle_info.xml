@@ -46,4 +46,32 @@
         android:layout_below="@+id/car_info_tv"
         android:textSize="15sp"/>
 
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Vehicle"
+        android:background="@color/colorPrimary"
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:radius="10sp"
+        android:layout_margin="20sp"
+        android:padding="10sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:id="@+id/btn_another"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="20sp"
+        android:text="Search Another"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        android:background="@android:color/transparent"/>
+
 </RelativeLayout>

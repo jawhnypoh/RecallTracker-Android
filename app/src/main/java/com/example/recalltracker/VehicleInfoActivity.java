@@ -3,8 +3,10 @@ package com.example.recalltracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.recalltracker.Utilities.VehicleInfoUtils;
@@ -15,10 +17,17 @@ public class VehicleInfoActivity extends AppCompatActivity {
 
     private TextView year_TV, vin_TV;
 
+    private Button addBtn, searchAnotherBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_info);
+
+        addBtn = (Button)findViewById(R.id.btn_add);
+        searchAnotherBtn = (Button)findViewById(R.id.btn_another);
+
+        searchAnotherBtn.setBackgroundColor(Color.TRANSPARENT);
 
         final String queryVIN = getIntent().getStringExtra("VIN_SEARCH_QUERY");
         String queryUrl = getIntent().getStringExtra("VIN_API_URL");
