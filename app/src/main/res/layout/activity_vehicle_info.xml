@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VehicleInfoActivity">
+
+    <TextView
+        android:id="@+id/confirm_tv"
+        android:paddingTop="80sp"
+        android:paddingLeft="10sp"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:text="Vehicle Found"/>
+
+    <ImageView
+        android:id="@+id/car_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_rally_car"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/confirm_tv"
+        android:paddingTop="20sp"
+        android:paddingBottom="40sp"/>
+
+    <TextView
+        android:id="@+id/car_info_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/car_img"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:paddingTop="20sp"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/vin_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/car_info_tv"
+        android:textSize="15sp"/>
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Vehicle"
+        android:background="@color/colorPrimary"
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:radius="10sp"
+        android:layout_margin="20sp"
+        android:padding="10sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:id="@+id/btn_another"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="20sp"
+        android:text="Search Another"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        android:background="@android:color/transparent"/>
+
+</RelativeLayout>
