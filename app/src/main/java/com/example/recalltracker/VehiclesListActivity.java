@@ -17,14 +17,23 @@ public class VehiclesListActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    List<VehicleItem> vehicleItemList;
+    List<VehicleItem> vehicleItemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicles_list);
 
-        vehicleItemList = new ArrayList<VehicleItem>();
+        VehicleItem vehicleItem = new VehicleItem();
+
+        String carName = "2017 TOYOTA RAV4 HV";
+        String carVIN = "JTMDJREV6HD120994";
+
+        vehicleItem.setCarName(carName);
+        vehicleItem.setCarVIN(carVIN);
+
+        vehicleItemList.add(vehicleItem);
+        vehicleItemList.add(vehicleItem);
 
         recyclerView = findViewById(R.id.vins_rv);
         recyclerView.setHasFixedSize(true);

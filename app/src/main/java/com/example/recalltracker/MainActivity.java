@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -29,12 +30,22 @@ public class MainActivity extends AppCompatActivity {
     private EditText mSearchBoxET;
     private static final String VIN_SEARCH_KEY = "VINSearchURL";
 
+    private Button vehiclesListBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Firebase.firebaseInit(this);
+
+        vehiclesListBtn = findViewById(R.id.btn_vin_list);
+        vehiclesListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToVehiclesListActivity();
+            }
+        });
 
         mSearchBoxET = findViewById(R.id.et_search_box);
         mSearchBoxET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -91,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), VehicleInfoActivity.class);
         intent.putExtra("VIN_API_URL", VINSearchURL);
         intent.putExtra("VIN_SEARCH_QUERY", searchQuery);
+        startActivity(intent);
+    }
+
+    private void goToVehiclesListActivity() {
+        Intent intent = new Intent(this, VehiclesListActivity.class);
         startActivity(intent);
     }
 }
