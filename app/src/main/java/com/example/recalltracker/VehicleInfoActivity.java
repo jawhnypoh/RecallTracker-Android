@@ -58,17 +58,17 @@ public class VehicleInfoActivity extends AppCompatActivity {
             @Override
             public void processFinish(String year, String make, String model) {
                 // if VIN is not found
-                Log.d(TAG, "API response :" + year + make + model);
                 mProgress.setVisibility(View.INVISIBLE);
                 if(make.isEmpty() || model.isEmpty() || year.isEmpty() ) {
                     Log.d(TAG, "if statement called");
                     addBtn.setVisibility(View.INVISIBLE);
-                    confirm_TV.setText("Vehicle not found.");
+                    confirm_TV.setText("Vehicle Not Found");
+                    vin_TV.setText("We couldn't find that vehicle with that VIN. Please try again.");
                 }
                 else {
                     Log.d(TAG, "else called");
                     addBtn.setVisibility(View.VISIBLE);
-                    confirm_TV.setText("Vehicle found.");
+                    confirm_TV.setText("Vehicle Found");
                     year_TV.setText(year + " " + make + " " + model);
                     vin_TV.setText("VIN: " + queryVIN);
                 }
