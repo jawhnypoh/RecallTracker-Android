@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Vehicle"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/rounded_button"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:radius="10sp"
@@ -70,6 +70,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        style="?android:attr/borderlessButtonStyle"
         android:visibility="visible"/>
 
     <Button
