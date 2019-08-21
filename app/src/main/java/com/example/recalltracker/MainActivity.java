@@ -12,11 +12,12 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.recalltracker.Utilities.VehicleInfoUtils;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSearchBoxET = (EditText)findViewById(R.id.et_search_box);
+        mSearchBoxET = findViewById(R.id.et_search_box);
         mSearchBoxET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -38,17 +39,16 @@ public class MainActivity extends AppCompatActivity {
 
                 String searchQuery = mSearchBoxET.getText().toString();
 
-                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    if(!TextUtils.isEmpty(searchQuery)) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if (!TextUtils.isEmpty(searchQuery)) {
 
                         InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(mSearchBoxET.getWindowToken(), 0);
+                        Objects.requireNonNull(imm).hideSoftInputFromWindow(mSearchBoxET.getWindowToken(), 0);
 
                         doVINSearch(searchQuery);
                         Log.d(TAG, "IME Search handled correctly ");
                         handled = true;
-                    }
-                    else {
+                    } else {
                         // TextUtils is empty, can't be allowed
                         Toast.makeText(getApplicationContext(),"VIN cannot be empty",Toast.LENGTH_SHORT).show();
                     }
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton searchButton = (ImageButton) findViewById(R.id.btn_search);
+        ImageButton searchButton = findViewById(R.id.btn_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(searchQuery)) {
 
                     InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(mSearchBoxET.getWindowToken(), 0);
+                    Objects.requireNonNull(imm).hideSoftInputFromWindow(mSearchBoxET.getWindowToken(), 0);
 
                     doVINSearch(searchQuery);
                 }
@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         String VINSearchURL = VehicleInfoUtils.buildVINURL(searchQuery);
         Bundle args = new Bundle();
         args.putString(VIN_SEARCH_KEY, VINSearchURL);
-        // getSupportLoaderManager().restartLoader(RECALL_TRACKER_SEARCH_LOADER_ID, args, this);
 
         Intent intent = new Intent(getBaseContext(), VehicleInfoActivity.class);
         intent.putExtra("VIN_API_URL", VINSearchURL);
