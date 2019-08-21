@@ -60,7 +60,6 @@ public class VehicleInfoUtils {
         protected void onPostExecute(JSONObject json) {
             try {
                 if(json != null) {
-
                     String year, make, model;
                     JSONArray jsonArray = json.getJSONArray("Results");
                     for(int i=0; i<jsonArray.length(); i++) {
