@@ -3,9 +3,11 @@ package com.example.recalltracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,6 +21,9 @@ public class VehicleInfoActivity extends AppCompatActivity {
 
     private Button addBtn, searchAnotherBtn;
 
+    // Nissan Rogue Sport: JN1BJ1CRXJW288164
+    // Toyota RAV4 HV: JTMDJREV6HD120994
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +31,13 @@ public class VehicleInfoActivity extends AppCompatActivity {
 
         addBtn = (Button)findViewById(R.id.btn_add);
         searchAnotherBtn = (Button)findViewById(R.id.btn_another);
-
         searchAnotherBtn.setBackgroundColor(Color.TRANSPARENT);
+        searchAnotherBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Go to Search activity
+                goToSearchActivity();
+            }
+        });
 
         final String queryVIN = getIntent().getStringExtra("VIN_SEARCH_QUERY");
         String queryUrl = getIntent().getStringExtra("VIN_API_URL");
@@ -48,5 +58,10 @@ public class VehicleInfoActivity extends AppCompatActivity {
         });
         Log.d(TAG, "setVehicleInfo() queryURL: " + queryURL);
         asyncTask.execute(queryURL);
+    }
+
+    private void goToSearchActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

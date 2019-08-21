@@ -18,9 +18,9 @@ public class VehicleInfoUtils {
 
     private static final String VIN_API_URL = "http://api.carmd.com/v3.0/decode";
 
-    private static final String VIN_API_PARTNER_TOKEN = "033ce0cbcc23423499590413ace18656";
+    private static final String VIN_API_PARTNER_TOKEN = "51f30c30efda47cdae96033bda957101";
 
-    private static final String VIN_API_AUTH_TOKEN = "MDc1OWQyZTQtMGFkMy00OGFhLWEyZTctNTRhZmY0Y2NlNjc5";
+    private static final String VIN_API_AUTH_TOKEN = "MzUyY2RiZjAtZWFlMC00YWYzLWEyOWQtNTQwMzdmOGI4OGY4";
 
     public static String buildVINURL(String vinQuery) {
         Uri.Builder builder = Uri.parse(VIN_API_URL).buildUpon();
