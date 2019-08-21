@@ -16,20 +16,25 @@ public class VehicleInfoUtils {
 
     private static final String TAG = "VehicleInfoUtils: ";
 
-    private static final String VIN_API_URL = "http://api.carmd.com/v3.0/decode?vin=5TFAW5F19EX759955";
+    private static final String VIN_API_URL = "http://api.carmd.com/v3.0/decode";
 
     private static final String VIN_API_PARTNER_TOKEN = "033ce0cbcc23423499590413ace18656";
 
     private static final String VIN_API_AUTH_TOKEN = "MDc1OWQyZTQtMGFkMy00OGFhLWEyZTctNTRhZmY0Y2NlNjc5";
 
+    public static String buildVINURL(String vinQuery) {
+        Uri.Builder builder = Uri.parse(VIN_API_URL).buildUpon();
+        builder.appendQueryParameter("vin", vinQuery);
+        Log.d(TAG, "buildVINURL: " + builder.build().toString());
+
+        return builder.build().toString();
+    }
 
     public interface AsyncResponse {
-
         void processFinish(Integer year, String make, String model);
     }
 
     public static class placeIdTask extends AsyncTask<String, Void, JSONObject> {
-
         // Callback Interface
         public AsyncResponse delegate = null;
 
@@ -40,9 +45,10 @@ public class VehicleInfoUtils {
 
         @Override
         protected JSONObject doInBackground(String...params) {
-
             JSONObject jsonVIN = null;
             try {
+                Log.d(TAG, "params[0]: " + params[0]);
+
                 jsonVIN = getVINJSON(params[0]);
 
             } catch (Exception e ) {
@@ -72,23 +78,9 @@ public class VehicleInfoUtils {
             }
         }
 
-        public static String buildVINURL(String vinQuery) {
-            Uri.Builder builder = Uri.parse(VIN_API_URL).buildUpon();
-
-            builder.appendPath(VIN_API_URL);
-            builder.appendPath(vinQuery);
-
-            Log.d(TAG, "buildVINURL: " + builder.build().toString());
-//            if(!TextUtils.isEmpty(searchQuery)) {
-//                builder.appendPath(searchQuery);
-//            }
-
-            return builder.build().toString();
-        }
-
-        public static JSONObject getVINJSON(String vinNumber) {
+        public static JSONObject getVINJSON(String queryURL) {
             try {
-                URL url = new URL(VIN_API_URL);
+                URL url = new URL(queryURL);
 
                 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 

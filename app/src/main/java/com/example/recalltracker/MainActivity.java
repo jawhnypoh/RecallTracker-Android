@@ -2,6 +2,7 @@ package com.example.recalltracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,14 +16,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.recalltracker.Utilities.RecallTrackerUtils;
+import com.example.recalltracker.Utilities.VehicleInfoUtils;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity: ";
 
     private EditText mSearchBoxET;
-    private ProgressBar mLoadingProgressBar;
     private static final String VIN_SEARCH_KEY = "VINSearchURL";
 
     @Override
@@ -68,8 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(mSearchBoxET.getWindowToken(), 0);
 
-                    Log.d(TAG, "search button hit");
-//                    doVINSearch(searchQuery);
+                    doVINSearch(searchQuery);
                 }
                 else {
                     // TextUtils is empty, can't be allowed
@@ -80,12 +79,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doVINSearch(String searchQuery) {
-        //String VINSearchURL = RecallTrackerUtils.buildVINSearchURL(searchQuery);
+        String VINSearchURL = VehicleInfoUtils.buildVINURL(searchQuery);
         Bundle args = new Bundle();
-//        args.putString(VIN_SEARCH_KEY, VINSearchURL);
-        mLoadingProgressBar.setVisibility(View.VISIBLE);
+        args.putString(VIN_SEARCH_KEY, VINSearchURL);
         // getSupportLoaderManager().restartLoader(RECALL_TRACKER_SEARCH_LOADER_ID, args, this);
 
-        // Log.d(TAG, "VINSearchURL is: " + VINSearchURL);
+        Intent intent = new Intent(getBaseContext(), VehicleInfoActivity.class);
+        intent.putExtra("VIN_API_URL", VINSearchURL);
+        intent.putExtra("VIN_SEARCH_QUERY", searchQuery);
+        startActivity(intent);
     }
 }
