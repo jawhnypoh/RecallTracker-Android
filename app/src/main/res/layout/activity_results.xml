@@ -13,26 +13,52 @@
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardBackgroundColor="#E6E6E6"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/MFG_Campaign_Number"
-                            android:layout_width="120dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:paddingBottom="30dp" />
+                            android:paddingTop="10dp"
+                            />
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/Notes"
                             android:layout_centerHorizontal="true"
-                            android:layout_width="85dp"
-                            android:layout_height="51dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_below="@+id/MFG_Campaign_Number"
+                            android:paddingTop="10dp"
                              />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:id="@+id/Defect"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/Notes"
+                            android:layout_centerHorizontal="true"
+                            android:paddingTop="10dp"
+                            />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:id="@+id/Consequences"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/Defect"
+                            android:layout_centerHorizontal="true"
+                            android:paddingTop="10dp"
+                            />
 
                 </RelativeLayout>
         </androidx.cardview.widget.CardView>
