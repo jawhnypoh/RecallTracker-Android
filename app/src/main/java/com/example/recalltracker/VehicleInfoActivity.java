@@ -51,8 +51,8 @@ public class VehicleInfoActivity extends AppCompatActivity {
 
         VehicleInfoUtils.placeIdTask asyncTask = new VehicleInfoUtils.placeIdTask(new VehicleInfoUtils.AsyncResponse() {
             @Override
-            public void processFinish(Integer year, String make, String model) {
-                year_TV.setText(Integer.toString(year) + " " + make + " " + model);
+            public void processFinish(String year, String make, String model) {
+                year_TV.setText(year + " " + make + " " + model);
                 vin_TV.setText("VIN: " + queryVIN);
             }
         });

@@ -29,7 +29,7 @@ public class VehicleInfoUtils {
     }
 
     public interface AsyncResponse {
-        void processFinish(Integer year, String make, String model);
+        void processFinish(String year, String make, String model);
     }
 
     public static class placeIdTask extends AsyncTask<String, Void, JSONObject> {
@@ -61,12 +61,11 @@ public class VehicleInfoUtils {
             try {
                 if(json != null) {
 
-                    Integer year;
-                    String make, model;
+                    String year, make, model;
                     JSONArray jsonArray = json.getJSONArray("Results");
                     for(int i=0; i<jsonArray.length(); i++) {
                         JSONObject details = jsonArray.getJSONObject(i);
-                        year = details.getInt("ModelYear");
+                        year = details.getString("ModelYear");
                         make = details.getString("Make");
                         model = details.getString("Model");
 
