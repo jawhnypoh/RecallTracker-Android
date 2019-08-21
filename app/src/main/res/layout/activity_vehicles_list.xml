@@ -14,4 +14,14 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <Button
+        android:id="@+id/btn_add_car"
+        android:layout_width="match_parent"
+        android:layout_height="55sp"
+        android:padding="10sp"
+        android:background="@color/colorAccent"
+        android:textColor="#FFF"
+        android:layout_alignParentBottom="true"
+        android:text="Add New Vehicle" />
+
 </RelativeLayout>
