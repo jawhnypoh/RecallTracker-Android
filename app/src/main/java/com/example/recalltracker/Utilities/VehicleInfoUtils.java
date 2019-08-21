@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,15 +17,12 @@ public class VehicleInfoUtils {
 
     private static final String TAG = "VehicleInfoUtils: ";
 
-    private static final String VIN_API_URL = "http://api.carmd.com/v3.0/decode";
-
-    private static final String VIN_API_PARTNER_TOKEN = "51f30c30efda47cdae96033bda957101";
-
-    private static final String VIN_API_AUTH_TOKEN = "MzUyY2RiZjAtZWFlMC00YWYzLWEyOWQtNTQwMzdmOGI4OGY4";
+    private static final String VIN_API_URL = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/";
 
     public static String buildVINURL(String vinQuery) {
         Uri.Builder builder = Uri.parse(VIN_API_URL).buildUpon();
-        builder.appendQueryParameter("vin", vinQuery);
+        builder.appendPath(vinQuery);
+        builder.appendQueryParameter("format", "json");
         Log.d(TAG, "buildVINURL: " + builder.build().toString());
 
         return builder.build().toString();
@@ -62,13 +60,18 @@ public class VehicleInfoUtils {
         protected void onPostExecute(JSONObject json) {
             try {
                 if(json != null) {
-                    JSONObject details = json.getJSONObject("data");
 
-                    Integer year = details.getInt("year");
-                    String make = details.getString("make");
-                    String model = details.getString("model");
+                    Integer year;
+                    String make, model;
+                    JSONArray jsonArray = json.getJSONArray("Results");
+                    for(int i=0; i<jsonArray.length(); i++) {
+                        JSONObject details = jsonArray.getJSONObject(i);
+                        year = details.getInt("ModelYear");
+                        make = details.getString("Make");
+                        model = details.getString("Model");
 
-                    delegate.processFinish(year, make, model);
+                        delegate.processFinish(year, make, model);
+                    }
                 }
                 else {
                     Log.e(TAG, "json is null");
@@ -83,9 +86,6 @@ public class VehicleInfoUtils {
                 URL url = new URL(queryURL);
 
                 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-
-                connection.setRequestProperty("Authorization", "Basic " + VIN_API_AUTH_TOKEN);
-                connection.setRequestProperty("Partner-Token", VIN_API_PARTNER_TOKEN);
 
                 int status = connection.getResponseCode();
                 if(status != 200) {
