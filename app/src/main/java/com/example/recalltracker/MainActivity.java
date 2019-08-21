@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void doVINSearch(String searchQuery) {
         //String VINSearchURL = RecallTrackerUtils.buildVINSearchURL(searchQuery);
         Bundle args = new Bundle();
