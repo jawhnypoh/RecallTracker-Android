@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
                         // Log and toast
                         Log.d(TAG, "Retrieved firebase push token");
-                        Toast.makeText(MainActivity.this, "Retrieved firebase push token", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,
+                                "Retrieved firebase push token", Toast.LENGTH_SHORT).show();
 
                         firebaseSignIn(token);
                     }
@@ -66,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             CollectionReference users = db.collection("users");
 
-                            Map<String, Object> data = DatabaseAPI.createUserData(pushToken, true, new ArrayList<String>());
+                            Map<String, Object> data = DatabaseAPI.createUserData(pushToken,
+                                    true, new ArrayList<String>());
 
                             DatabaseAPI.updateUser(users, userId, data);
                         } else {

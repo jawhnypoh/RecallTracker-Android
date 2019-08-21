@@ -12,6 +12,7 @@ public class DatabaseAPI {
 
     public static void updateUser(final CollectionReference users, final String uid, final Map<String, Object> data) {
         DocumentReference docRef = users.document(uid);
+        data.put("updated", System.currentTimeMillis());
         docRef.set(data, SetOptions.merge());
     }
 
