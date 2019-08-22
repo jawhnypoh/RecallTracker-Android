@@ -3,6 +3,7 @@ package com.example.recalltracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences preferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
+
+        if(!preferences.getBoolean("onboarding_complete", false)){
+            Intent onboarding = new Intent(this, OnboardingActivity.class);
+            startActivity(onboarding);
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
         Firebase.firebaseInit(this);
