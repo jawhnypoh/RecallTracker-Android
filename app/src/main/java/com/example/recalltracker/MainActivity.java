@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.example.recalltracker.Utilities.VehicleInfoUtils;
 
@@ -25,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity: ";
 
     private EditText mSearchBoxET;
+    private ProgressBar mProgress;
     private static final String VIN_SEARCH_KEY = "VINSearchURL";
     Button Results;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Results = findViewById(R.id.results_page);
         Results.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
                 goToResults();
             }
         });
+
+        // this accesses an id in different layout
+        View inflatedView = getLayoutInflater().inflate(R.layout.activity_vehicle_info, null);
+        mProgress = (ProgressBar)inflatedView.findViewById(R.id.load_more_progress);
+
         mSearchBoxET = findViewById(R.id.et_search_box);
         mSearchBoxET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -56,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         doVINSearch(searchQuery);
                         Log.d(TAG, "IME Search handled correctly ");
                         handled = true;
+
                     } else {
                         // TextUtils is empty, can't be allowed
                         Toast.makeText(getApplicationContext(),"VIN cannot be empty",Toast.LENGTH_SHORT).show();
@@ -90,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     private void doVINSearch(String searchQuery) {
+        mProgress.setVisibility(View.VISIBLE);
         String VINSearchURL = VehicleInfoUtils.buildVINURL(searchQuery);
         Bundle args = new Bundle();
         args.putString(VIN_SEARCH_KEY, VINSearchURL);
