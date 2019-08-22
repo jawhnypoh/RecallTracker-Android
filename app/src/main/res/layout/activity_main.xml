@@ -22,6 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:backgroundTint="#72BABF"
             android:padding="14sp"/>
 
