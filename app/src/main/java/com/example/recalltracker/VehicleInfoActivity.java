@@ -44,6 +44,14 @@ public class VehicleInfoActivity extends AppCompatActivity {
             }
         });
 
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Add vehicle to list in DB and go to VehicleListActivity
+                goToVehicleListActivity();
+            }
+        });
+
         final String queryVIN = getIntent().getStringExtra("VIN_SEARCH_QUERY");
         String queryUrl = getIntent().getStringExtra("VIN_API_URL");
 
@@ -83,4 +91,8 @@ public class VehicleInfoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void goToVehicleListActivity() {
+        Intent intent = new Intent(this, VehiclesListActivity.class);
+        startActivity(intent);
+    }
 }
