@@ -1,8 +1,6 @@
 package com.example.recalltracker;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -63,7 +61,7 @@ public class VehicleInfoActivity extends AppCompatActivity {
                     Log.d(TAG, "if statement called");
                     addBtn.setVisibility(View.INVISIBLE);
                     confirm_TV.setText("Vehicle Not Found");
-                    vin_TV.setText("We couldn't find that vehicle with that VIN. Please try again.");
+                    vin_TV.setText("We couldn't find a vehicle with that VIN. Please try again.");
                 }
                 else {
                     Log.d(TAG, "else called");
