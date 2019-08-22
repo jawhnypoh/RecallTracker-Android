@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.recalltracker.Models.VehicleItem;
 import com.example.recalltracker.Utilities.*;
+import com.example.recalltracker.Utils.DatabaseAPI;
 
 public class VehicleInfoActivity extends AppCompatActivity {
 
@@ -22,6 +23,8 @@ public class VehicleInfoActivity extends AppCompatActivity {
     private Button addBtn;
 
     private ProgressBar mProgress;
+
+    private DatabaseAPI databaseAPI;
 
     // Nissan Rogue Sport: JN1BJ1CRXJW288164
     // Toyota RAV4 HV: JTMDJREV6HD120994
@@ -34,6 +37,9 @@ public class VehicleInfoActivity extends AppCompatActivity {
 
         final String queryVIN = getIntent().getStringExtra("VIN_SEARCH_QUERY");
         String queryUrl = getIntent().getStringExtra("VIN_API_URL");
+
+        String userId = getIntent().getStringExtra("USER_ID");
+        databaseAPI = new DatabaseAPI(userId);
 
         addBtn = findViewById(R.id.btn_add);
         Button searchAnotherBtn = findViewById(R.id.btn_another);
@@ -80,6 +86,7 @@ public class VehicleInfoActivity extends AppCompatActivity {
                     vin_TV.setText("VIN: " + queryVIN);
 
                     VehicleItem vehicleItem = new VehicleItem(year, make, model, queryVIN);
+                    databaseAPI.addVehicle(vehicleItem);
                 }
             }
         });

@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         Map<String, Object> data = new HashMap<>();
         data.put("pushToken", pushToken);
 
-        DatabaseAPI.updateUser(users, userId, data);
+        DatabaseAPI.updateUser(data);
     }
 
     private void doVINSearch(String searchQuery) {
@@ -169,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), VehicleInfoActivity.class);
         intent.putExtra("VIN_API_URL", VINSearchURL);
         intent.putExtra("VIN_SEARCH_QUERY", searchQuery);
+        intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
 
