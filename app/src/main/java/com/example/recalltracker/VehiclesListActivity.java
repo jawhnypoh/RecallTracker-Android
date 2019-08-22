@@ -35,6 +35,7 @@ public class VehiclesListActivity extends AppCompatActivity {
     private Button addVehicleBtn;
 
     private String userId;
+    private DatabaseAPI databaseAPI;
 
     ArrayList vehicleItemList = new ArrayList<>();
 
@@ -59,11 +60,9 @@ public class VehiclesListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         userId = getIntent().getStringExtra("USER_ID");
+        databaseAPI = new DatabaseAPI(userId);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference users = db.collection("users");
-
-        DatabaseAPI.getUser(users, userId, new OnCompleteListener<DocumentSnapshot>() {
+        databaseAPI.getUser(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {

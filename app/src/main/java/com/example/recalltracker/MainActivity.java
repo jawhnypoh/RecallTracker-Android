@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar mProgress;
     private static final String VIN_SEARCH_KEY = "VINSearchURL";
 
-    private String userId;
+    private DatabaseAPI databaseAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+                    String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+                    databaseAPI = new DatabaseAPI(userId);
                     firebaseInit(userId);
                 }
             }
@@ -140,13 +141,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updatePushToken(String userId, String pushToken) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference users = db.collection("users");
-
         Map<String, Object> data = new HashMap<>();
         data.put("pushToken", pushToken);
 
-        DatabaseAPI.updateUser(users, userId, data);
+        databaseAPI.updateUser(data);
     }
 
     private void doVINSearch(String searchQuery) {
@@ -163,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void goToVehiclesListActivity() {
         Intent intent = new Intent(this, VehiclesListActivity.class);
-        intent.putExtra("USER_ID", userId);
+        intent.putExtra("USER_ID", databaseAPI.getUserId());
         startActivity(intent);
     }
 
