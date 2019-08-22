@@ -5,6 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ResultsActivity">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/vins_rv" >
+
+        </androidx.recyclerview.widget.RecyclerView>
         <androidx.cardview.widget.CardView
 
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
