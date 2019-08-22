@@ -3,6 +3,7 @@ package com.example.recalltracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.text.TextUtils;
@@ -21,6 +22,9 @@ import com.example.recalltracker.Utilities.VehicleInfoUtils;
 
 import java.util.Objects;
 
+import com.example.recalltracker.Utils.Firebase;
+
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity: ";
@@ -32,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences preferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
+
+        if(!preferences.getBoolean("onboarding_complete", false)){
+            Intent onboarding = new Intent(this, OnboardingActivity.class);
+            startActivity(onboarding);
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
 
@@ -42,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
                 goToResults();
             }
         });
+
+
+        Firebase.firebaseInit(this);
+      
 
         // this accesses an id in different layout
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_vehicle_info, null);
