@@ -83,3 +83,4 @@ public class OnboardingActivity extends FragmentActivity {
     }
 }
 
+// citation for vector graphic: vecteezy.com
