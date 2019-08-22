@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:gravity="center_horizontal"
+    android:background="#FFFFFF"
     >
 
     <TextView
@@ -13,26 +14,26 @@
         android:text="Welcome to Recall Tracker"
         android:gravity="center"
         android:textSize="48sp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="Recall updates that ensure car safety"
         />
 
     <ImageView
         android:id="@+id/car_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_rally_car"
+        android:layout_width="1100px"
+        android:layout_height="1200px"
+        android:src="@mipmap/ic_mechanic_car2_round"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/confirm_tv"
-        android:paddingTop="100sp"
-        android:paddingBottom="40sp"/>
+        android:paddingTop="30sp"
+        android:paddingBottom="10sp"/>
 
 </LinearLayout>

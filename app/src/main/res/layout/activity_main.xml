@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:backgroundTint="#72BABF"
+            android:backgroundTint="#4986BF"
             android:padding="14sp"/>
 
         <ImageButton
