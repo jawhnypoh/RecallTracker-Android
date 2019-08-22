@@ -18,22 +18,21 @@
         />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="295dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="Recall updates that ensure car safety"
-        />
+        android:text="Keep your passengers safe by staying updated with manufacturer recalls"
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/car_img"
-        android:layout_width="450dp"
-        android:layout_height="350dp"
-        android:src="@drawable/ic_mechanic_car"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
         android:layout_below="@+id/confirm_tv"
-        android:paddingTop="30sp"
-        android:paddingBottom="10sp"/>
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="20sp"
+        android:paddingBottom="10sp"
+        android:src="@drawable/ic_mechanic_car" />
 
 </LinearLayout>
