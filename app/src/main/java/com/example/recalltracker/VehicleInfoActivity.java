@@ -10,7 +10,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.recalltracker.Utilities.VehicleInfoUtils;
+import com.example.recalltracker.Models.VehicleItem;
+import com.example.recalltracker.Utilities.*;
 
 public class VehicleInfoActivity extends AppCompatActivity {
 
@@ -31,6 +32,9 @@ public class VehicleInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vehicle_info);
         confirm_TV = findViewById(R.id.confirm_tv);
 
+        final String queryVIN = getIntent().getStringExtra("VIN_SEARCH_QUERY");
+        String queryUrl = getIntent().getStringExtra("VIN_API_URL");
+
         addBtn = (Button)findViewById(R.id.btn_add);
         searchAnotherBtn = (Button)findViewById(R.id.btn_another);
         mProgress = (ProgressBar)findViewById(R.id.load_more_progress);
@@ -49,9 +53,6 @@ public class VehicleInfoActivity extends AppCompatActivity {
                 goToVehicleListActivity();
             }
         });
-
-        final String queryVIN = getIntent().getStringExtra("VIN_SEARCH_QUERY");
-        String queryUrl = getIntent().getStringExtra("VIN_API_URL");
 
         setVehicleInfo(queryUrl, queryVIN);
     }
@@ -77,6 +78,8 @@ public class VehicleInfoActivity extends AppCompatActivity {
                     confirm_TV.setText("Vehicle Found");
                     year_TV.setText(year + " " + make + " " + model);
                     vin_TV.setText("VIN: " + queryVIN);
+
+                    VehicleItem vehicleItem = new VehicleItem(year, make, model, queryVIN);
                 }
             }
         });

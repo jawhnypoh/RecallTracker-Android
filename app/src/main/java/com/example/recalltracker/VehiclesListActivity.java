@@ -42,7 +42,7 @@ public class VehiclesListActivity extends AppCompatActivity {
         String carName = "2017 TOYOTA RAV4 HV";
         String carVIN = "JTMDJREV6HD120994";
 
-        vehicleItem.setCarName(carName);
+        vehicleItem.setFullName(carName);
         vehicleItem.setCarVIN(carVIN);
 
         VehicleItem vehicleItem1 = new VehicleItem();
@@ -50,7 +50,7 @@ public class VehiclesListActivity extends AppCompatActivity {
         carName = "2018 NISSAN ROGUE SPORT";
         carVIN = "JN1BJ1CRXJW288164";
 
-        vehicleItem1.setCarName(carName);
+        vehicleItem1.setFullName(carName);
         vehicleItem1.setCarVIN(carVIN);
 
         vehicleItemList.add(vehicleItem);

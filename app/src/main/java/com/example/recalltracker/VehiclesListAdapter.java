@@ -36,7 +36,8 @@ public class VehiclesListAdapter extends RecyclerView.Adapter<VehiclesListAdapte
     @Override
     public void onBindViewHolder(vehiclesListViewHolder holder, int position) {
         VehicleItem mList = list.get(position);
-        holder.carName.setText(mList.getCarName());
+
+        holder.carName.setText(mList.getFullName());
         holder.carVIN.setText("VIN: " + mList.getCarVIN());
     }
 
