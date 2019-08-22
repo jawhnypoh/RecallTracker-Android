@@ -93,6 +93,7 @@ public class VehicleInfoActivity extends AppCompatActivity {
                     Log.d(TAG, "else called");
                     addBtn.setVisibility(View.VISIBLE);
                     car_IV.setVisibility(View.VISIBLE);
+                    mProgress.setVisibility(View.INVISIBLE);
                     confirm_TV.setText("Vehicle Found");
                     year_TV.setText(year + " " + make + " " + model);
                     vin_TV.setText("VIN: " + queryVIN);

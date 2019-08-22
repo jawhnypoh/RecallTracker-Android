@@ -1,6 +1,7 @@
 package com.example.recalltracker;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,8 @@ public class VehiclesListAdapter extends RecyclerView.Adapter<VehiclesListAdapte
     @Override
     public void onBindViewHolder(vehiclesListViewHolder holder, int position) {
         VehicleItem mList = list.get(position);
-        holder.carName.setText(mList.getYear() + " " + mList.getMake() + " " + mList.getModel());
+        holder.carName.setText(mList.getFullName());
+        Log.d(TAG, "holder.carName: " + mList.getFullName());
         holder.carVIN.setText(String.format("VIN: %s", mList.getCarVIN()));
     }
 
