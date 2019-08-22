@@ -19,7 +19,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingBottom="15sp"
+            android:paddingBottom="40sp"
             android:layout_weight="0.5"
             android:textColor="@color/colorPrimary"
             android:background="@android:color/transparent"
