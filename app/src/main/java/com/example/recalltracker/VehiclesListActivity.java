@@ -1,20 +1,32 @@
 package com.example.recalltracker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.recalltracker.Models.VehicleItem;
+import com.example.recalltracker.Utils.DatabaseAPI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class VehiclesListActivity extends AppCompatActivity {
+
+    private static final String TAG = "VehiclesListActivity";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -22,7 +34,9 @@ public class VehiclesListActivity extends AppCompatActivity {
 
     private Button addVehicleBtn;
 
-    List<VehicleItem> vehicleItemList = new ArrayList<>();
+    private String userId;
+
+    ArrayList vehicleItemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,28 +51,6 @@ public class VehiclesListActivity extends AppCompatActivity {
             }
         });
 
-//        VehicleItem vehicleItem = new VehicleItem();
-//
-//        String carName = "2017 TOYOTA RAV4 HV";
-//        String carVIN = "JTMDJREV6HD120994";
-//
-//        vehicleItem.setCarName(carName);
-//        vehicleItem.setCarVIN(carVIN);
-//
-//        VehicleItem vehicleItem1 = new VehicleItem();
-//
-//        carName = "2018 NISSAN ROGUE SPORT";
-//        carVIN = "JN1BJ1CRXJW288164";
-//
-//        vehicleItem1.setCarName(carName);
-//        vehicleItem1.setCarVIN(carVIN);
-//
-//        vehicleItemList.add(vehicleItem);
-//        vehicleItemList.add(vehicleItem1);
-
-
-
-
         recyclerView = findViewById(R.id.vins_rv);
         recyclerView.setHasFixedSize(true);
 
@@ -66,13 +58,28 @@ public class VehiclesListActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // specify an adapter (see also next example)
-        mAdapter = new VehiclesListAdapter(vehicleItemList, VehiclesListActivity.this);
-        recyclerView.setAdapter(mAdapter);
+        userId = getIntent().getStringExtra("USER_ID");
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference users = db.collection("users");
+
+        DatabaseAPI.getUser(users, userId, new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+
+                    mAdapter = new VehiclesListAdapter(vehicleItemList, VehiclesListActivity.this);
+                    recyclerView.setAdapter(mAdapter);
+                }
+            }
+        });
+
     }
 
     private void goToSearchActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
 }

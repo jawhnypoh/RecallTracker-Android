@@ -24,6 +24,15 @@ public class DatabaseAPI {
         docRef.set(data, SetOptions.merge());
     }
 
+    public static void addVehicle(final CollectionReference users, final String uid, final VehicleItem vehicle) {
+        Map<String, Object> data = new HashMap<>();
+        ArrayList<VehicleItem> vehicles = new ArrayList<VehicleItem>();
+        vehicles.add(vehicle);
+        data.put("vehicles", vehicles);
+
+        updateUser(users, uid, data);
+    }
+
     public static Map<String, Object> createUserData(String pushToken, boolean notificationsEnabled, ArrayList<VehicleItem> vehicles) {
         Map<String, Object> data = new HashMap<>();
         data.put("pushToken", pushToken);
