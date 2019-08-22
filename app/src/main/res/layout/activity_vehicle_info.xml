@@ -22,8 +22,7 @@
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:paddingTop="10dp"
-        android:visibility="invisible" />
+        android:paddingTop="10dp" />
 
     <ImageView
         android:id="@+id/car_img"
