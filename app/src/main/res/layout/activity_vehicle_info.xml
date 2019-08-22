@@ -22,11 +22,10 @@
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:paddingTop="10dp"
-        android:visibility="invisible" />
+        android:paddingTop="10dp" />
 
     <ImageView
-        android:id="@+id/car_img"
+        android:id="@+id/car_iv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_rally_car"
