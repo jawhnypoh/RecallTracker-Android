@@ -1,7 +1,9 @@
 package com.example.recalltracker.Utils;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
@@ -9,6 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DatabaseAPI {
+
+    public static void getUser(CollectionReference users, String uid, OnCompleteListener<DocumentSnapshot> onCompleteListener) {
+        DocumentReference docRef = users.document(uid);
+        docRef.get().addOnCompleteListener(onCompleteListener);
+    }
 
     public static void updateUser(final CollectionReference users, final String uid, final Map<String, Object> data) {
         DocumentReference docRef = users.document(uid);
