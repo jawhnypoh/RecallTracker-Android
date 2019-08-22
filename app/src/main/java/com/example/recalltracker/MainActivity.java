@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String userId;
 
+    private DatabaseAPI databaseAPI;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+                    databaseAPI = new DatabaseAPI(userId);
                     firebaseInit(userId);
                 }
             }
@@ -151,13 +154,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updatePushToken(String userId, String pushToken) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference users = db.collection("users");
-
         Map<String, Object> data = new HashMap<>();
         data.put("pushToken", pushToken);
 
-        DatabaseAPI.updateUser(data);
+        databaseAPI.updateUser(data);
     }
 
     private void doVINSearch(String searchQuery) {
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void goToVehiclesListActivity() {
         Intent intent = new Intent(this, VehiclesListActivity.class);
-        intent.putExtra("USER_ID", userId);
+        intent.putExtra("USER_ID", databaseAPI.getUserId());
         startActivity(intent);
     }
 

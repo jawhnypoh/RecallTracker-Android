@@ -23,8 +23,8 @@ public class DatabaseAPI {
         this.userId = userId;
     }
 
-    public void getUser(CollectionReference users, String uid, OnCompleteListener<DocumentSnapshot> onCompleteListener) {
-        DocumentReference docRef = users.document(uid);
+    public void getUser(OnCompleteListener<DocumentSnapshot> onCompleteListener) {
+        DocumentReference docRef = users.document(userId);
         docRef.get().addOnCompleteListener(onCompleteListener);
     }
 
@@ -51,4 +51,19 @@ public class DatabaseAPI {
         return data;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public CollectionReference getUsers() {
+        return users;
+    }
+
+    public void setUsers(CollectionReference users) {
+        this.users = users;
+    }
 }
