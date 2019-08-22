@@ -34,7 +34,7 @@ public class VehicleInfoUtils {
 
     public static class placeIdTask extends AsyncTask<String, Void, JSONObject> {
         // Callback Interface
-        public AsyncResponse delegate = null;
+        public AsyncResponse delegate;
 
         public placeIdTask(AsyncResponse asyncResponse) {
             //Assigning call back interface through constructor
@@ -59,10 +59,10 @@ public class VehicleInfoUtils {
         @Override
         protected void onPostExecute(JSONObject json) {
             try {
-                if(json != null) {
+                if (json != null) {
                     String year, make, model;
                     JSONArray jsonArray = json.getJSONArray("Results");
-                    for(int i=0; i<jsonArray.length(); i++) {
+                    for (int i=0; i<jsonArray.length(); i++) {
                         JSONObject details = jsonArray.getJSONObject(i);
                         year = details.getString("ModelYear");
                         make = details.getString("Make");
@@ -86,7 +86,7 @@ public class VehicleInfoUtils {
                 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
                 int status = connection.getResponseCode();
-                if(status != 200) {
+                if (status != 200) {
                     Log.e(TAG, "bad response code, status is: " + status);
                 }
 
@@ -95,9 +95,9 @@ public class VehicleInfoUtils {
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(connection.getInputStream()));
 
-                StringBuffer json = new StringBuffer(1024);
-                String tmp="";
-                while((tmp=reader.readLine())!=null)
+                StringBuilder json = new StringBuilder(1024);
+                String tmp;
+                while ((tmp=reader.readLine()) != null)
                     json.append(tmp).append("\n");
                 reader.close();
 

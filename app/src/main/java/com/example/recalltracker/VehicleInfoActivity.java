@@ -19,7 +19,7 @@ public class VehicleInfoActivity extends AppCompatActivity {
 
     private TextView year_TV, vin_TV, confirm_TV;
 
-    private Button addBtn, searchAnotherBtn;
+    private Button addBtn;
 
     private ProgressBar mProgress;
 
@@ -35,9 +35,9 @@ public class VehicleInfoActivity extends AppCompatActivity {
         final String queryVIN = getIntent().getStringExtra("VIN_SEARCH_QUERY");
         String queryUrl = getIntent().getStringExtra("VIN_API_URL");
 
-        addBtn = (Button)findViewById(R.id.btn_add);
-        searchAnotherBtn = (Button)findViewById(R.id.btn_another);
-        mProgress = (ProgressBar)findViewById(R.id.load_more_progress);
+        addBtn = findViewById(R.id.btn_add);
+        Button searchAnotherBtn = findViewById(R.id.btn_another);
+        mProgress = findViewById(R.id.load_more_progress);
         searchAnotherBtn.setBackgroundColor(Color.TRANSPARENT);
         searchAnotherBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -58,8 +58,8 @@ public class VehicleInfoActivity extends AppCompatActivity {
     }
 
     protected void setVehicleInfo(String queryURL, final String queryVIN) {
-        year_TV = (TextView)findViewById(R.id.car_info_tv);
-        vin_TV = (TextView)findViewById(R.id.vin_tv);
+        year_TV = findViewById(R.id.car_info_tv);
+        vin_TV = findViewById(R.id.vin_tv);
 
         VehicleInfoUtils.placeIdTask asyncTask = new VehicleInfoUtils.placeIdTask(new VehicleInfoUtils.AsyncResponse() {
             @Override

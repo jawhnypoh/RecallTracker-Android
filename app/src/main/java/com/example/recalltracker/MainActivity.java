@@ -1,5 +1,6 @@
 package com.example.recalltracker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,9 +21,19 @@ import android.widget.ProgressBar;
 
 import com.example.recalltracker.Utilities.VehicleInfoUtils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-import com.example.recalltracker.Utils.Firebase;
+import com.example.recalltracker.Utils.DatabaseAPI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar mProgress;
     private static final String VIN_SEARCH_KEY = "VINSearchURL";
 
-    private Button vehiclesListBtn;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +61,18 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        Firebase.firebaseInit(this);
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+                    firebaseInit(userId);
+                }
+            }
+        });
 
-        vehiclesListBtn = findViewById(R.id.btn_vin_list);
+        Button vehiclesListBtn = findViewById(R.id.btn_vin_list);
         vehiclesListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         // this accesses an id in different layout
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_vehicle_info, null);
-        mProgress = (ProgressBar)inflatedView.findViewById(R.id.load_more_progress);
+        mProgress = inflatedView.findViewById(R.id.load_more_progress);
         mSearchBoxET = findViewById(R.id.et_search_box);
         mSearchBoxET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -111,6 +131,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void firebaseInit(final String userId) {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = Objects.requireNonNull(task.getResult()).getToken();
+                        Log.d(TAG, "Token: " + token);
+
+                        updatePushToken(userId, token);
+                    }
+                });
+    }
+
+    private void updatePushToken(String userId, String pushToken) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference users = db.collection("users");
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("pushToken", pushToken);
+
+        DatabaseAPI.updateUser(users, userId, data);
+    }
 
     private void doVINSearch(String searchQuery) {
         mProgress.setVisibility(View.VISIBLE);
@@ -126,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void goToVehiclesListActivity() {
         Intent intent = new Intent(this, VehiclesListActivity.class);
+        intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
+
 }

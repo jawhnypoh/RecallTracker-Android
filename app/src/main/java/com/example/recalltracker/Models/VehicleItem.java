@@ -6,7 +6,6 @@ public class VehicleItem {
     private String model;
     private String year;
     private String carVIN;
-    private String fullName;
 
     public VehicleItem(String make, String model, String year, String carVIN) {
         this.make = make;
@@ -39,20 +38,15 @@ public class VehicleItem {
         this.year = year;
     }
 
+    public String getFullName() {
+        return year + " " + make + " " + model;
+    }
+
     public String getCarVIN() {
         return carVIN;
     }
 
     public void setCarVIN(String carVIN) {
         this.carVIN = carVIN;
-    }
-
-    public String getFullName() {
-        fullName = year + " "  + make + " " + model;
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 }

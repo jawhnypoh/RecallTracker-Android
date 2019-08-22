@@ -1,5 +1,6 @@
 package com.example.recalltracker.Utils;
 
+import com.example.recalltracker.Models.VehicleItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -23,11 +24,20 @@ public class DatabaseAPI {
         docRef.set(data, SetOptions.merge());
     }
 
-    public static Map<String, Object> createUserData(String pushToken, boolean notificationsEnabled, ArrayList<String> vins) {
+    public static void addVehicle(final CollectionReference users, final String uid, final VehicleItem vehicle) {
+        Map<String, Object> data = new HashMap<>();
+        ArrayList<VehicleItem> vehicles = new ArrayList<VehicleItem>();
+        vehicles.add(vehicle);
+        data.put("vehicles", vehicles);
+
+        updateUser(users, uid, data);
+    }
+
+    public static Map<String, Object> createUserData(String pushToken, boolean notificationsEnabled, ArrayList<VehicleItem> vehicles) {
         Map<String, Object> data = new HashMap<>();
         data.put("pushToken", pushToken);
         data.put("notificationsEnabled", notificationsEnabled);
-        data.put("vins", vins);
+        data.put("vehicles", vehicles);
         return data;
     }
 
