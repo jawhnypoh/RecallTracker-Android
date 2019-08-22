@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.recalltracker.Utilities.Models.RecallItem;
+
 public class ResultsActivity extends AppCompatActivity {
 
     Typeface roboto;
@@ -22,7 +25,8 @@ public class ResultsActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    //List<>
+
+    List<RecallItem> recallItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +53,40 @@ public class ResultsActivity extends AppCompatActivity {
         TextView defect_Header =findViewById(R.id.Defect_Header);
         TextView consequence_Header =findViewById(R.id.Consequence_Header);
 
-        setResults(Campaign_Number,MFG_Campaign_Header);
-        setResults(Note,notes_Header);
-        setResults(Defect,defect_Header);
-        setResults(Consequence,consequence_Header);
-        setResults(CampaignDescription,MFG_Campaign_number);
-        setResults(NoteDescription,notes);
-        setResults(Defectresults,defect);
-        setResults(Consequences,consequence);
+        RecallItem recallItem = new RecallItem();
+        recallItem.setCampaign_Number(CampaignDescription);
+        recallItem.setNote(NoteDescription);
+        recallItem.setDefect(Defectresults);
+        recallItem.setConsequences(Consequences);
+
+        RecallItem recallItem1 = new RecallItem();
+        recallItem1.setCampaign_Number(CampaignDescription);
+        recallItem1.setNote(NoteDescription);
+        recallItem1.setDefect(Defectresults);
+        recallItem1.setConsequences(Consequences);
+
+        recallItems.add(recallItem);
+        recallItems.add(recallItem1);
+
+        recyclerView = findViewById(R.id.results_rv);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new ResultsActivityAdapter(recallItems, ResultsActivity.this);
+        recyclerView.setAdapter(mAdapter);
+
+//        setResults(Campaign_Number,MFG_Campaign_Header);
+//        setResults(Note,notes_Header);
+//        setResults(Defect,defect_Header);
+//        setResults(Consequence,consequence_Header);
+//        setResults(CampaignDescription,MFG_Campaign_number);
+//        setResults(NoteDescription,notes);
+//        setResults(Defectresults,defect);
+//        setResults(Consequences,consequence);
+
+
     }
 
     protected void setResults(String descriptor, TextView textview) {
