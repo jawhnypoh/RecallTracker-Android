@@ -49,7 +49,7 @@ public class VehiclesListActivity extends AppCompatActivity {
 
         String year = "2017";
         String make = "TOYOTA";
-        String model = "RAV4 HV ";
+        String model = "RAV4 HV";
 
         String carName = "2017 TOYOTA RAV4 HV";
         String carVIN = "JTMDJREV6HD120994";
