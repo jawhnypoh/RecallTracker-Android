@@ -37,7 +37,15 @@
             android:paddingTop="10sp"
             android:src="@drawable/ic_search_black_24dp" />
 
-
+        <Button
+            android:id="@+id/btn_vin_list"
+            android:layout_width="match_parent"
+            android:layout_height="55sp"
+            android:padding="10sp"
+            android:background="@color/colorAccent"
+            android:textColor="#FFF"
+            android:layout_alignParentBottom="true"
+            android:text="See Your Cars" />
 
     </RelativeLayout>
 </LinearLayout>

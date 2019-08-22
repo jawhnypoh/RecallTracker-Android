@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        card_view:cardBackgroundColor="#E6E6E6"
+        card_view:cardCornerRadius="16dp"
+        card_view:cardElevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textStyle="bold"
+            android:text="Campaign Number:"
+            android:id="@+id/MFG_Campaign_Header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="5dp"
+            />
+
+        <TextView
+            android:textStyle="normal"
+            android:layout_weight="10"
+            android:layout_below="@+id/MFG_Campaign_Header"
+            android:id="@+id/MFG_Campaign_Number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="5dp"
+            />
+
+        <TextView
+            android:textStyle="bold"
+            android:text="Notes:"
+            android:id="@+id/Notes_Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="11dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="5dp"
+            android:layout_below="@+id/MFG_Campaign_Number"
+            />
+
+        <TextView
+            android:textStyle="normal"
+            android:id="@+id/Notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Notes_Header"
+            android:paddingTop="2dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="5dp"
+            />
+
+        <TextView
+            android:textStyle="bold"
+            android:text="Defect:"
+            android:id="@+id/Defect_Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="11dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="5dp"
+            android:layout_below="@+id/Notes"
+            />
+
+        <TextView
+            android:textStyle="normal"
+            android:id="@+id/Defect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Defect_Header"
+            android:paddingTop="2dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="5dp"
+            />
+
+        <TextView
+            android:textStyle="bold"
+            android:text="Consequence:"
+            android:id="@+id/Consequence_Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="11dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="5dp"
+            android:layout_below="@+id/Defect"
+            />
+
+        <TextView
+            android:textStyle="normal"
+            android:id="@+id/Consequences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Consequence_Header"
+            android:paddingTop="2dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="5dp"
+            />
+
+    </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
