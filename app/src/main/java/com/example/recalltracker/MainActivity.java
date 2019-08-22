@@ -20,6 +20,9 @@ import com.example.recalltracker.Utilities.VehicleInfoUtils;
 
 import java.util.Objects;
 
+import com.example.recalltracker.Utils.Firebase;
+
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity: ";
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Firebase.firebaseInit(this);
+      
         // this accesses an id in different layout
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_vehicle_info, null);
         mProgress = (ProgressBar)inflatedView.findViewById(R.id.load_more_progress);
