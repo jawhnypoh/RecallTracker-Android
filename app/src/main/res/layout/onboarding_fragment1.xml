@@ -28,9 +28,9 @@
 
     <ImageView
         android:id="@+id/car_img"
-        android:layout_width="1100px"
-        android:layout_height="1200px"
-        android:src="@mipmap/ic_mechanic_car2_round"
+        android:layout_width="450dp"
+        android:layout_height="350dp"
+        android:src="@drawable/ic_mechanic_car"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/confirm_tv"
         android:paddingTop="30sp"
