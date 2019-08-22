@@ -17,6 +17,8 @@ public class VehicleInfoUtils {
 
     private static final String TAG = "VehicleInfoUtils: ";
 
+    private static int status;
+
     private static final String VIN_API_URL = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/";
 
     public static String buildVINURL(String vinQuery) {
@@ -85,9 +87,10 @@ public class VehicleInfoUtils {
 
                 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
-                int status = connection.getResponseCode();
+                status = connection.getResponseCode();
                 if (status != 200) {
                     Log.e(TAG, "bad response code, status is: " + status);
+                    getAPIStatus();
                 }
 
                 Log.d(TAG, connection.toString());
@@ -112,5 +115,9 @@ public class VehicleInfoUtils {
                 return null;
             }
         }
+    }
+
+    public static int getAPIStatus() {
+        return status;
     }
 }

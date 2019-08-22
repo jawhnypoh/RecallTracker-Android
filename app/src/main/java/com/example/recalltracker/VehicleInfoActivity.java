@@ -68,7 +68,6 @@ public class VehicleInfoActivity extends AppCompatActivity {
                 goToVehicleListActivity();
             }
         });
-
         setVehicleInfo(queryUrl, queryVIN);
     }
 
@@ -80,6 +79,10 @@ public class VehicleInfoActivity extends AppCompatActivity {
             @Override
             public void processFinish(String year, String make, String model) {
                 // if VIN is not found
+                if(VehicleInfoUtils.getAPIStatus() != 200) {
+                    confirm_TV.setText("Service Down");
+                }
+
                 if(make.isEmpty() || model.isEmpty() || year.isEmpty() ) {
                     car_IV.setVisibility(View.VISIBLE);
                     Log.d(TAG, "if statement called");
