@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,11 +21,15 @@ public class VehicleInfoActivity extends AppCompatActivity {
 
     private TextView year_TV, vin_TV, confirm_TV;
 
+    private ImageView car_IV;
+
     private Button addBtn;
 
     private ProgressBar mProgress;
 
     private DatabaseAPI databaseAPI;
+
+    private VehicleItem vehicleItem;
 
     // Nissan Rogue Sport: JN1BJ1CRXJW288164
     // Toyota RAV4 HV: JTMDJREV6HD120994
@@ -41,9 +46,10 @@ public class VehicleInfoActivity extends AppCompatActivity {
         String userId = getIntent().getStringExtra("USER_ID");
         databaseAPI = new DatabaseAPI(userId);
 
-        addBtn = findViewById(R.id.btn_add);
         Button searchAnotherBtn = findViewById(R.id.btn_another);
         mProgress = findViewById(R.id.load_more_progress);
+        car_IV = findViewById(R.id.car_iv);
+        car_IV.setVisibility(View.INVISIBLE);
         searchAnotherBtn.setBackgroundColor(Color.TRANSPARENT);
         searchAnotherBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -52,10 +58,13 @@ public class VehicleInfoActivity extends AppCompatActivity {
             }
         });
 
+        addBtn = findViewById(R.id.btn_add);
+        addBtn.setVisibility(View.INVISIBLE);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Add vehicle to list in DB and go to VehicleListActivity
+                addToDB(vehicleItem);
                 goToVehicleListActivity();
             }
         });
@@ -73,25 +82,29 @@ public class VehicleInfoActivity extends AppCompatActivity {
                 // if VIN is not found
                 mProgress.setVisibility(View.INVISIBLE);
                 if(make.isEmpty() || model.isEmpty() || year.isEmpty() ) {
+                    car_IV.setVisibility(View.VISIBLE);
                     Log.d(TAG, "if statement called");
-                    addBtn.setVisibility(View.INVISIBLE);
                     confirm_TV.setText("Vehicle Not Found");
                     vin_TV.setText("We couldn't find a vehicle with that VIN. Please try again.");
                 }
                 else {
                     Log.d(TAG, "else called");
                     addBtn.setVisibility(View.VISIBLE);
+                    car_IV.setVisibility(View.VISIBLE);
                     confirm_TV.setText("Vehicle Found");
                     year_TV.setText(year + " " + make + " " + model);
                     vin_TV.setText("VIN: " + queryVIN);
 
-                    VehicleItem vehicleItem = new VehicleItem(year, make, model, queryVIN);
-                    databaseAPI.addVehicle(vehicleItem);
+                    vehicleItem = new VehicleItem(year, make, model, queryVIN);
                 }
             }
         });
         Log.d(TAG, "setVehicleInfo() queryURL: " + queryURL);
         asyncTask.execute(queryURL);
+    }
+
+    private void addToDB(VehicleItem vehicleItem) {
+        databaseAPI.addVehicle(vehicleItem);
     }
 
     private void goToSearchActivity() {

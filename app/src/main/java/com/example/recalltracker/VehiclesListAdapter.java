@@ -21,6 +21,8 @@ public class VehiclesListAdapter extends RecyclerView.Adapter<VehiclesListAdapte
     private List<VehicleItem> list;
     private Context mContext;
 
+    private static ClickListener clickListener;
+
     public VehiclesListAdapter(List<VehicleItem> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
@@ -37,7 +39,7 @@ public class VehiclesListAdapter extends RecyclerView.Adapter<VehiclesListAdapte
     @Override
     public void onBindViewHolder(vehiclesListViewHolder holder, int position) {
         VehicleItem mList = list.get(position);
-        holder.carName.setText(mList.getFullName());
+        holder.carName.setText(mList.getYear() + " " + mList.getMake() + " " + mList.getModel());
         holder.carVIN.setText(String.format("VIN: %s", mList.getCarVIN()));
     }
 
@@ -56,14 +58,28 @@ public class VehiclesListAdapter extends RecyclerView.Adapter<VehiclesListAdapte
         return arraySize;
     }
 
-    class vehiclesListViewHolder extends RecyclerView.ViewHolder {
+    public static class vehiclesListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView carName;
         TextView carVIN;
 
         public vehiclesListViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             carName = itemView.findViewById(R.id.vehicle_name);
             carVIN = itemView.findViewById(R.id.vin_number);
         }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onItemClick(getAdapterPosition(), v);
+        }
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        VehiclesListAdapter.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(int position, View v);
     }
 }

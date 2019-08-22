@@ -45,24 +45,26 @@ public class VehiclesListActivity extends AppCompatActivity {
             }
         });
 
-//        VehicleItem vehicleItem = new VehicleItem();
-//
-//        String carName = "2017 TOYOTA RAV4 HV";
-//        String carVIN = "JTMDJREV6HD120994";
-//
-//        vehicleItem.setFullName(carName);
-//        vehicleItem.setCarVIN(carVIN);
-//
-//        VehicleItem vehicleItem1 = new VehicleItem();
-//
-//        carName = "2018 NISSAN ROGUE SPORT";
-//        carVIN = "JN1BJ1CRXJW288164";
-//
-//        vehicleItem1.setFullName(carName);
-//        vehicleItem1.setCarVIN(carVIN);
-//
-//        vehicleItemList.add(vehicleItem);
-//        vehicleItemList.add(vehicleItem1);
+        String year = "2017";
+        String make = "TOYOTA";
+        String model = "RAV4 HV ";
+
+        String carName = "2017 TOYOTA RAV4 HV";
+        String carVIN = "JTMDJREV6HD120994";
+
+        VehicleItem vehicleItem = new VehicleItem(year, make, model, carVIN);
+
+        carName = "2018 NISSAN ROGUE SPORT";
+        carVIN = "JN1BJ1CRXJW288164";
+
+        year = "2018";
+        make = "NISSAN";
+        model = "ROGUE SPORT";
+
+        VehicleItem vehicleItem1 = new VehicleItem(year, make, model, carVIN);
+
+        vehicleItemList.add(vehicleItem);
+        vehicleItemList.add(vehicleItem1);
 
         recyclerView = findViewById(R.id.vins_rv);
         recyclerView.setHasFixedSize(true);
@@ -81,11 +83,19 @@ public class VehiclesListActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
 
                     mAdapter = new VehiclesListAdapter(vehicleItemList, VehiclesListActivity.this);
+
+                    ((VehiclesListAdapter) mAdapter).setOnItemClickListener(new VehiclesListAdapter.ClickListener() {
+                        @Override
+                        public void onItemClick(int position, View v) {
+                            // Call the Firebase API to get Recalls for specific vehicle
+                            goToResultsActivity();
+                            Log.d(TAG, "onItemClick position: " + position);
+                        }
+                    });
                     recyclerView.setAdapter(mAdapter);
                 }
             }
         });
-
     }
 
     private void goToSearchActivity() {
@@ -93,4 +103,8 @@ public class VehiclesListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void goToResultsActivity() {
+        Intent intent = new Intent(this, ResultsActivity.class);
+        startActivity(intent);
+    }
 }
