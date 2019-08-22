@@ -19,10 +19,12 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingBottom="15sp"
             android:layout_weight="0.5"
             android:textColor="@color/colorPrimary"
             android:background="@android:color/transparent"
             android:text="Find Your Car"
+            android:textSize="20sp"
             android:id="@+id/skip"
             />
     </LinearLayout>
@@ -36,7 +38,7 @@
         android:layout_centerHorizontal="true"
         android:visibility="invisible"
         app:stl_dividerThickness="0dp"
-        app:stl_indicatorColor="#1e88e5"
+        app:stl_indicatorColor="@android:color/transparent"
         />
 
 </RelativeLayout>
