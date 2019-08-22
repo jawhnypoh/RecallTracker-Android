@@ -41,7 +41,6 @@ public class VehicleInfoActivity extends AppCompatActivity {
         String userId = getIntent().getStringExtra("USER_ID");
         databaseAPI = new DatabaseAPI(userId);
 
-        addBtn = findViewById(R.id.btn_add);
         Button searchAnotherBtn = findViewById(R.id.btn_another);
         mProgress = findViewById(R.id.load_more_progress);
         searchAnotherBtn.setBackgroundColor(Color.TRANSPARENT);
@@ -52,6 +51,8 @@ public class VehicleInfoActivity extends AppCompatActivity {
             }
         });
 
+        addBtn = findViewById(R.id.btn_add);
+        addBtn.setVisibility(View.INVISIBLE);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +75,6 @@ public class VehicleInfoActivity extends AppCompatActivity {
                 mProgress.setVisibility(View.INVISIBLE);
                 if(make.isEmpty() || model.isEmpty() || year.isEmpty() ) {
                     Log.d(TAG, "if statement called");
-                    addBtn.setVisibility(View.INVISIBLE);
                     confirm_TV.setText("Vehicle Not Found");
                     vin_TV.setText("We couldn't find a vehicle with that VIN. Please try again.");
                 }

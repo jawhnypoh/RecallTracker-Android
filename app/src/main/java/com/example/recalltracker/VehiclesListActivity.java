@@ -111,6 +111,7 @@ public class VehiclesListActivity extends AppCompatActivity {
     }
 
     private void goToResultsActivity() {
-        Intent intent = new Intent(this, )
+        Intent intent = new Intent(this, ResultsActivity.class);
+        startActivity(intent);
     }
 }

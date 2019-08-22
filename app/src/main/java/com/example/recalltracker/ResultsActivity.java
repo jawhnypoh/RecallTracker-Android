@@ -32,13 +32,13 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         Campaign_Number = "Campaign Number:";
-        CampaignDescription = "This shouldn't be here";
+        CampaignDescription = "N030023";
         Note = "Note:";
-        NoteDescription = "wHaT ArE U dOIn iN my sWaMp";
+        NoteDescription = "GM RECALL NO. 03023.CUSTOMERS CAN ALSO CONTACT THE NATIONAL HIGHWAY TRAFFIC SAFETY ADMINISTRATION&#39;S AUTO SAFETY HOTLINE AT 1-888-DASH-2-DOT (1-888-327-4236).";
         Defect = "Defect:";
-        Defectresults = "Testing";
+        Defectresults = "ON CERTAIN MINIVANS, PICKUP TRUCKS, AND SPORT UTILITY VEHICLES WITH CERTAIN MODEL-ENGINE COMBINATIONS, THE WINDSHIELD WIPER MOTOR MAY FAIL DUE TO CRACKED SOLDER JOINTS ON THE CONTROLLER CIRCUIT BOARD.  THE WINDSHIELD WIPERS COULD WORK INTERMITTENTLY OR NOT AT ALL.";
         Consequence = "Consequence:";
-        Consequences = "Failed to load string";
+        Consequences = "IF THIS WERE TO OCCUR DURING BAD WEATHER, DRIVER VISIBILITY WOULD BE REDUCED, WHICH COULD RESULT IN A CRASH.";
 
         super.onCreate(savedInstanceState);
 
