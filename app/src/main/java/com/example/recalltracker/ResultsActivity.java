@@ -1,17 +1,28 @@
 package com.example.recalltracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import java.util.ArrayList;
+import java.util.List;
 public class ResultsActivity extends AppCompatActivity {
 
     Typeface roboto;
 
     String Campaign_Number, Note, NoteDescription, CampaignDescription, Defect, Defectresults, Consequence, Consequences;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    //List<>
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +30,11 @@ public class ResultsActivity extends AppCompatActivity {
         Campaign_Number = "Campaign Number:";
         CampaignDescription = "This shouldn't be here";
         Note = "Note:";
-        NoteDescription = "wHaT ArE U dOIn";
+        NoteDescription = "wHaT ArE U dOIn iN my sWaMp";
         Defect = "Defect:";
         Defectresults = "Testing";
         Consequence = "Consequence:";
-        Consequences = "Sales sux";
+        Consequences = "Failed to load string";
 
         super.onCreate(savedInstanceState);
 
