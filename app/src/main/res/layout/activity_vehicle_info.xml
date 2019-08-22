@@ -25,7 +25,7 @@
         android:paddingTop="10dp" />
 
     <ImageView
-        android:id="@+id/car_img"
+        android:id="@+id/car_iv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_rally_car"
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Vehicle"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/rounded_button"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:radius="10sp"
@@ -69,6 +69,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        style="?android:attr/borderlessButtonStyle"
         android:visibility="visible"/>
 
     <Button
