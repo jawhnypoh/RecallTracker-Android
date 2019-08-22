@@ -2,6 +2,7 @@ package com.example.recalltracker;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ public class OnboardingActivity extends FragmentActivity {
         pager = (ViewPager) findViewById(R.id.pager);
         indicator = (SmartTabLayout) findViewById(R.id.indicator);
         skip = (Button) findViewById(R.id.skip);
+        skip.setBackgroundColor(Color.TRANSPARENT);
+
 
         FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
