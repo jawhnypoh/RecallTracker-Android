@@ -78,23 +78,23 @@ public class VehiclesListActivity extends AppCompatActivity {
         userId = getIntent().getStringExtra("USER_ID");
         databaseAPI = new DatabaseAPI(userId);
 
+        mAdapter = new VehiclesListAdapter(vehicleItemList, VehiclesListActivity.this);
+
+        ((VehiclesListAdapter) mAdapter).setOnItemClickListener(new VehiclesListAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                // Call the Firebase API to get Recalls for specific vehicle
+                goToResultsActivity();
+                Log.d(TAG, "onItemClick position: " + position);
+            }
+        });
+        recyclerView.setAdapter(mAdapter);
+
         databaseAPI.getUser(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-
-                    mAdapter = new VehiclesListAdapter(vehicleItemList, VehiclesListActivity.this);
-
-                    ((VehiclesListAdapter) mAdapter).setOnItemClickListener(new VehiclesListAdapter.ClickListener() {
-                        @Override
-                        public void onItemClick(int position, View v) {
-                            // Call the Firebase API to get Recalls for specific vehicle
-                            goToResultsActivity();
-                            Log.d(TAG, "onItemClick position: " + position);
-                        }
-                    });
-                    recyclerView.setAdapter(mAdapter);
                 }
             }
         });

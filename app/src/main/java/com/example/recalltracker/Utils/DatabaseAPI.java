@@ -1,5 +1,7 @@
 package com.example.recalltracker.Utils;
 
+import android.util.Log;
+
 import com.example.recalltracker.Models.VehicleItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -17,13 +19,17 @@ public class DatabaseAPI {
     private String userId;
     private CollectionReference users;
 
+    private final String TAG = "DatabaseAPI: ";
+
     public DatabaseAPI(String userId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         this.users = db.collection("users");
-        this.userId = userId;
+        this.userId = "dEWeomGp1YfCSNeLLmqXLn34zDZ2";
+//        this.userId = userId;
     }
 
     public void getUser(OnCompleteListener<DocumentSnapshot> onCompleteListener) {
+        Log.d(TAG, "userId: " + userId);
         DocumentReference docRef = users.document(userId);
         docRef.get().addOnCompleteListener(onCompleteListener);
     }
