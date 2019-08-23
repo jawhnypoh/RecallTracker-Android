@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                     databaseAPI = new DatabaseAPI(userId);
-                    firebaseInit(userId);
+                    firebaseInit();
                 }
             }
         });
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void firebaseInit(final String userId) {
+    private void firebaseInit() {
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
@@ -146,12 +146,12 @@ public class MainActivity extends AppCompatActivity {
                         String token = Objects.requireNonNull(task.getResult()).getToken();
                         Log.d(TAG, "Token: " + token);
 
-                        updatePushToken(userId, token);
+                        updatePushToken(token);
                     }
                 });
     }
 
-    private void updatePushToken(String userId, String pushToken) {
+    private void updatePushToken(String pushToken) {
         Map<String, Object> data = new HashMap<>();
         data.put("pushToken", pushToken);
 
