@@ -39,8 +39,7 @@ public class VehicleItem {
     }
 
     public String getFullName() {
-        String fullName = make + " " + model + " " + year;
-        return fullName;
+        return year + " " + make + " " + model;
     }
 
     public String getCarVIN() {
