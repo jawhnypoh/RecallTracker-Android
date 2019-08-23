@@ -101,7 +101,7 @@ public class VehicleInfoActivity extends AppCompatActivity {
                     year_TV.setText(year + " " + make + " " + model);
                     vin_TV.setText("VIN: " + queryVIN);
 
-                    vehicleItem = new VehicleItem(year, make, model, queryVIN);
+                    vehicleItem = new VehicleItem(make, model, year, queryVIN);
                 }
             }
         });
